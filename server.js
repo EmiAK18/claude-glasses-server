@@ -11,7 +11,4 @@ app.post('/answer', (req, res) => {
 app.get('/answer', (req, res) => {
   res.json({ text: latestAnswer });
 });
-app.get('/answer-text', (req, res) => {
-  res.send(latestAnswer);
-});
 app.listen(3000, () => console.log('Server läuft!'));
