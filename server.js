@@ -14,7 +14,7 @@ app.get('/answer', (req, res) => {
 });
 
 app.get('/', (req, res) => {
-  res.send(`<!DOCTYPE html><html><head><meta charset="UTF-8"></head><body><p>${latestAnswer}</p></body></html>`);
+  res.send(`<!DOCTYPE html><html><head><meta charset="UTF-8"></head><body><article><p>${latestAnswer}</p></article></body></html>`);
 });
 
 app.listen(3000, () => console.log('Server läuft!'));
