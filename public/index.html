@@ -2,42 +2,25 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<style>
+body { 
+  font-size: 24px; 
+  padding: 20px; 
+  font-family: Arial;
+  background: white;
+}
+</style>
 </head>
 <body>
-<script type="module">
-import { waitForEvenAppBridge, TextContainerProperty, CreateStartUpPageContainer } from 'https://cdn.jsdelivr.net/npm/@evenrealities/even_hub_sdk/dist/index.mjs'
-
-const bridge = await waitForEvenAppBridge()
-
-async function fetchAndDisplay() {
-  const res = await fetch("https://claude-glasses-server.onrender.com/answer")
-  const data = await res.json()
-  const text = data.text
-
-  const textProp = new TextContainerProperty({
-    xPosition: 0,
-    yPosition: 0,
-    width: 576,
-    height: 288,
-    borderWidth: 0,
-    borderColor: 5,
-    paddingLength: 4,
-    containerID: 1,
-    containerName: "main",
-    content: text,
-    isEventCapture: 1,
-  })
-
-  await bridge.createStartUpPageContainer(
-    new CreateStartUpPageContainer({
-      containerTotalNum: 1,
-      textObject: [textProp],
-    })
-  )
+<div id="text">Lade...</div>
+<script>
+async function load() {
+  const res = await fetch("/answer-text")
+  const text = await res.text()
+  document.getElementById("text").innerText = text
+  setTimeout(load, 3000)
 }
-
-await fetchAndDisplay()
-setInterval(fetchAndDisplay, 5000)
+load()
 </script>
 </body>
 </html>
